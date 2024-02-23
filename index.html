@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Draggable DIV -->
+<div id="mydiv">
+    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div id="mydivheader">Click here to move</div>
+    <p>Move</p>
+    <p>this</p>
+    <p>DIV</p>
+  </div>
+    <div class="container">
+            <div id="chronometerDiv" class="red-background">
+                <h1 class="title">Pomodoro</h1>
+                    <div class="tri-state-toggle">
+
+                        <button class="tri-state-toggle-button" id="toggle-button1">
+                            5''
+                        </button>
+
+                        <button class="tri-state-toggle-button" id="toggle-button2">
+                            10''
+                        </button>
+
+                        <button class="tri-state-toggle-button" id="toggle-button3">
+                            15''
+                        </button>
+                    </div>
+            </div>
+            <div id="pendingDiv" class="red-background">
+                <h1 class="title">Pending</h1>
+                
+                <button class="button_plus"></button>
+            </div>
+            <div id="doingDiv" class="red-background">
+                <h1 class="title">Doing</h1>
+            </div>
+            <div id="doneDiv" class="red-background">
+                <h1 class="title">Done</h1>
+            </div>
+    </div>
+    
+  
+    <script src="script.js"></script>
+</body>
+</html>

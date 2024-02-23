@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'MouldyCheese';
+    src: url('fonts/MouldyCheeseRegular-WyMWG.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'MouldyCheese', sans-serif;
+    color: bisque;
+    background-color: rgb(247, 228, 205);
+  }
+
+.red-background{
+    position: relative;
+    margin-top: 5%;
+    margin-left: 2.5%;
+    margin-right: 1%;
+    background-image: linear-gradient(#F01100, rgb(255, 72, 0)); 
+    float: left;
+    box-sizing: border-box;
+    height: 600px;
+    width: 400px;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+
+     /* Add animation properties */
+ animation: fadeIn 2s ease-in; 
+}
+
+.title{
+    position: relative;
+    margin-top: 8%;
+}
+
+.class{
+    overflow: hidden; 
+}
+@keyframes fadeIn {  
+    from {  
+        opacity:0;  
+        
+    }  
+ 
+    to {  
+        opacity:1;
+         
+    }  
+ }
+
+ .button_plus {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: #F01100;
+    cursor: pointer;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    /* Mittig */
+    top: 80%;
+    left: 45%;
+  }
+  
+  .button_plus:after {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%);
+    height: 4px;
+    width: 50%;
+    background: bisque;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .button_plus:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: bisque;
+    height: 50%;
+    width: 4px;
+  }
+  
+  .button_plus:hover:before,
+  .button_plus:hover:after {
+    background: #F01100;
+    transition: 0.2s;
+  }
+  
+  .button_plus:hover {
+    background-color: bisque;
+    transition: 0.2s;
+  }
+
+  .tri-state-toggle {
+    position: absolute;
+    top: 210px;
+    left: 25px;
+    background: bisque;
+    box-shadow: inset 0 2px 8px 0 rgba(165,170,174,0.25);
+    border-radius: 24px;
+    display: inline-block;
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: column;
+  transition: all 500ms ease; 
+}
+
+.tri-state-toggle-button {
+    border-radius: 22px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    background-color: transparent;
+    border: 0px solid transparent;
+    margin: 2px;
+    color: red;
+    font-family: 'MouldyCheese', sans-serif;
+    cursor: pointer;
+  
+/*    -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition:    all 0.5s ease-in-out;
+  -ms-transition:     all 0.5s ease-in-out;
+  -o-transition:      all 0.5s ease-in-out; */
+  transition:         all 0.5s ease;
+}
+
+.tri-state-toggle-button.active {
+    background-image: linear-gradient(-180deg, #fff 0%, #FAFAFA 81%, #F2F2F2 100%);
+    border: 1px solid rgba(207,207,207,0.6);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+    color: black;
+    font-weight: 500;
+  transition: all .5s ease-in;
+}
+
+.tri-state-toggle-button:focus {
+  outline: none;
+}
+
+#mydiv {
+    position: absolute;
+    z-index: 9;
+    color: black;
+    background-color: bisque;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  #mydivheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #F01100;
+    border-radius: 10px;
+    color: bisque
+  }
