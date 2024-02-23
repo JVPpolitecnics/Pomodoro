@@ -1,3 +1,4 @@
+
 //tripple button functionality
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("toggle-button1").classList.add("active");
@@ -54,5 +55,16 @@ function dragElement(elmnt) {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
+  }
+
+  //Read inputs and add new task
+  function addNewTask(){
+    let title = document.getElementById("titleInput");
+    let text = document.getElementById("floatingTextarea2");
+
+  }
+  function createPostIt(){
+    let card = document.createElement("div");
+    card.id = "mydiv";
   }
 }
