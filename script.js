@@ -1,11 +1,14 @@
+let isDragging = false;
+let offsetX, offsetY;
+let currentDraggable;
 
-//tripple button functionality
-document.addEventListener('DOMContentLoaded', function() {
+// tripple button functionality
+document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("toggle-button1").classList.add("active");
 
-    document.querySelectorAll(".tri-state-toggle-button").forEach(function(button) {
-        button.addEventListener('click', function() {
-            document.querySelectorAll(".tri-state-toggle-button").forEach(function(btn) {
+    document.querySelectorAll(".tri-state-toggle-button").forEach(function (button) {
+        button.addEventListener('click', function () {
+            document.querySelectorAll(".tri-state-toggle-button").forEach(function (btn) {
                 btn.classList.remove("active");
             });
             let id = this.id;
@@ -14,57 +17,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Make the DIV element draggable:
-dragElement(document.getElementById("mydiv"));
-
-function dragElement(elmnt) {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-
-  //Read inputs and add new task
-  function addNewTask(){
+function addNewTask() {
     let title = document.getElementById("titleInput");
     let text = document.getElementById("floatingTextarea2");
 
-  }
-  function createPostIt(){
-    let card = document.createElement("div");
-    card.id = "mydiv";
-  }
+    let newTask = document.createElement("div");
+    newTask.className = "mydiv";
+
+    let header = document.createElement("div");
+    header.className = "mydivheader";
+    header.innerHTML = "Task";
+
+    let head = document.createElement("p");
+    head.innerHTML = title.value;
+
+    let content = document.createElement("p");
+    content.innerHTML = text.value;
+
+    // Append content to header
+    newTask.appendChild(content);
+    header.appendChild(head);
+
+    // Append header to newTask
+    newTask.appendChild(header);
+
+    // Make the new task draggable
+    newTask.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        currentDraggable = newTask;
+        offsetX = e.clientX - newTask.getBoundingClientRect().left;
+        offsetY = e.clientY - newTask.getBoundingClientRect().top;
+        newTask.style.cursor = 'grabbing';
+    });
+
+    document.body.appendChild(newTask); // Append the new task to the body or another container
 }
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+
+    currentDraggable.style.left = `${x}px`;
+    currentDraggable.style.top = `${y}px`;
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    if (currentDraggable) {
+        currentDraggable.style.cursor = 'grab';
+        currentDraggable = null;
+    }
+});
