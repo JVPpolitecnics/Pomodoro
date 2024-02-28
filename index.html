@@ -16,31 +16,30 @@
     </style>
 </head>
 <body>
-    <!-- Draggable DIV -->
-     <!-- <div id="mydiv">
-     Include a header DIV with the same name as the draggable DIV, followed by "header" 
-        <div class="mydivheader">Click here to move</div>
-        <p>Pizzza pastyal elmklmfd dsajfkshk</p>
-        <p>this</p>
-        <p>DIV</p>
-      </div>  -->
     <div class="containerBox">
             <div id="chronometerDiv" class="red-background">
                 <h1 class="title">Pomodoro</h1>
                     <div class="tri-state-toggle">
 
-                        <button class="tri-state-toggle-button" id="toggle-button1">
+                        <button class="tri-state-toggle-button" id="toggle-button1" onclick="handleTriStateButton(1)">
                             5''
                         </button>
 
-                        <button class="tri-state-toggle-button" id="toggle-button2">
+                        <button class="tri-state-toggle-button" id="toggle-button2" onclick="handleTriStateButton(2)">
                             10''
                         </button>
 
-                        <button class="tri-state-toggle-button" id="toggle-button3">
+                        <button class="tri-state-toggle-button" id="toggle-button3" onclick="handleTriStateButton(3)">
                             15''
                         </button>
                     </div>
+                    <div class="roundBox" id="clock1">
+                        <h1 id="workTimer" class="number">20:00</h1>
+                    </div>
+                    <div class="roundBox" id="clock2">
+                        <h1 id="restTimer" class="number">05:00</h1>
+                    </div>
+                    <button id="startStopButton" onclick="executeTimerFunction()">Start</button>
             </div>
             <div id="pendingDiv" class="red-background">
                 <h1 class="title">Pending</h1>

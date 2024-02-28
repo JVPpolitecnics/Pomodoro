@@ -1,6 +1,9 @@
+//drag variables
 let isDragging = false;
 let offsetX, offsetY;
 let currentDraggable;
+//timer variables
+let time;
 
 // tripple button functionality
 document.addEventListener('DOMContentLoaded', function () {
@@ -26,21 +29,21 @@ function addNewTask() {
 
     let header = document.createElement("div");
     header.className = "mydivheader";
-    header.innerHTML = "Task";
+    header.innerHTML = title.value;
 
-    let head = document.createElement("p");
-    head.innerHTML = title.value;
 
     let content = document.createElement("p");
     content.innerHTML = text.value;
 
+      // Append header to newTask
+      newTask.appendChild(header);
+
     // Append content to header
     newTask.appendChild(content);
-    header.appendChild(head);
 
-    // Append header to newTask
-    newTask.appendChild(header);
+   
 
+  
     // Make the new task draggable
     newTask.addEventListener('mousedown', (e) => {
         isDragging = true;
@@ -70,3 +73,28 @@ document.addEventListener('mouseup', () => {
         currentDraggable = null;
     }
 });
+
+//timer 
+
+
+function handleTriStateButton(timeSetter){
+let restTime = document.getElementById("restTimer");
+
+if(timeSetter == 1){
+restTime.innerHTML = "05:00";
+time = 500;
+} else if (timeSetter == 2) {
+  restTime.innerHTML = "10:00";
+  time = 1000;
+} else if (timeSetter == 3){
+  restTime.innerHTML = "15:00";
+  time = 1500;
+}
+}
+
+function executeTimerFunction(){
+let countdownTime = document.getElementById("workTimer");
+
+}
+
+var intervalID = setInterval(executeTimerFunction, 1000);
