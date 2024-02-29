@@ -198,3 +198,14 @@
     top: 450px;
     left: 167px;
   }
+  #workTag{
+    position: absolute;
+    top: 120px;
+    left: 157px;
+  }
+
+  #restTag{
+    position: absolute;
+    top: 270px;
+    left: 158px;
+  }

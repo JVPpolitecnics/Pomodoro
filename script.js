@@ -2,9 +2,13 @@
 let isDragging = false;
 let offsetX, offsetY;
 let currentDraggable;
+let workTimer = 2000;
 //timer variables
-let time;
-
+let restTime;
+let startButton;
+let targetDateTime = new Date();
+let restBoolean = false;
+let intervalCountdown;
 // tripple button functionality
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("toggle-button1").classList.add("active");
@@ -19,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+targetDateTime.setMinutes(targetDateTime.getMinutes() + 1);
 
 function addNewTask() {
     let title = document.getElementById("titleInput");
@@ -78,23 +84,63 @@ document.addEventListener('mouseup', () => {
 
 
 function handleTriStateButton(timeSetter){
-let restTime = document.getElementById("restTimer");
+let restTimeTag = document.getElementById("restTimer");
 
 if(timeSetter == 1){
-restTime.innerHTML = "05:00";
-time = 500;
+restTimeTag.innerHTML = "05:00";
+restTime = 5;
 } else if (timeSetter == 2) {
-  restTime.innerHTML = "10:00";
-  time = 1000;
+  restTimeTag.innerHTML = "10:00";
+  restTime = 10;
 } else if (timeSetter == 3){
-  restTime.innerHTML = "15:00";
-  time = 1500;
+  restTimeTag.innerHTML = "15:00";
+  restTime = 15;
 }
+}
+function updateTimerDisplay(timeDifference, timerDisplay) {
+    // Calculate days, hours, minutes, and seconds
+    let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    // Update the timer display
+    timerDisplay.innerHTML = minutes+ ":"+ seconds;
+}
+
+function countdownTime(){
+    let countdownTime;
+    let currentTime = new Date();
+    
+    if (restBoolean){
+        targetDateTime.setMinutes(restTime);
+        countdownTime = document.getElementById("restTimer");
+    } else{
+        countdownTime = document.getElementById("workTimer");
+    }
+    let timeDifference = targetDateTime - currentTime;
+
+    // Check if the target date and time have passed
+    if (timeDifference <= 0) {
+        clearInterval(intervalCountdown);
+        // Perform any action when the target date and time are reached
+      
+        restBoolean = true;
+        startButton.innerHTML = "Start"
+    } else {
+        updateTimerDisplay(timeDifference, countdownTime);
+    }
 }
 
 function executeTimerFunction(){
-let countdownTime = document.getElementById("workTimer");
+
+    startButton = document.getElementById("startStopButton");
+
+if (startButton.innerHTML === "Start"){
+    startButton.innerHTML = "Stop";
+    intervalCountdown = setInterval(countdownTime, 1000);
+} else {
+    clearInterval(intervalCountdown);
+    startButton.innerHTML = "Start";
 
 }
+}
 
-var intervalID = setInterval(executeTimerFunction, 1000);
