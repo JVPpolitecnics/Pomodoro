@@ -88,16 +88,16 @@ document.addEventListener('mouseup', () => {
 
 
 function handleTriStateButton(timeSetter){
-let restTimeTag = document.getElementById("restTimer");
+
 
 if(timeSetter == 1){
-restTimeTag.innerHTML = "05:00";
+
 restTime = 5;
 } else if (timeSetter == 2) {
-  restTimeTag.innerHTML = "10:00";
+ 
   restTime = 10;
 } else if (timeSetter == 3){
-  restTimeTag.innerHTML = "15:00";
+ 
   restTime = 15;
 }
 }
@@ -118,7 +118,7 @@ function countdownTime(){
     workTag = document.getElementById("workTag");
     timeDifference = targetDateTime - currentTime;
     
-    
+    console.log(restTime);
 
     // Check if the target date and time have passed
    
@@ -126,10 +126,11 @@ function countdownTime(){
    
     if (timeDifference <= 0) {
       if (!restBoolean){
-        targetDateTime = restTime;
+        targetDateTime = new Date();    
+        targetDateTime.setMinutes(targetDateTime.getMinutes() + restTime);
         rest();
       } else {
-        targetDateTime = initialTime;
+        targetDateTime = targetDateTime.setMinutes(targetDateTime.getMinutes() + initialTime);
       }
         
        
