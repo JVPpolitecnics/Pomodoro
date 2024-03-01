@@ -4,11 +4,15 @@ let offsetX, offsetY;
 let currentDraggable;
 let workTimer = 2000;
 //timer variables
-let restTime;
+let restTime = 5;
 let startButton;
 let targetDateTime = new Date();
 let restBoolean = false;
 let intervalCountdown;
+let  countdownTimer = document.getElementById("workTimer");
+let timeDifference;
+let currentTime; 
+let initialTime = 1;
 // tripple button functionality
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("toggle-button1").classList.add("active");
@@ -24,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-targetDateTime.setMinutes(targetDateTime.getMinutes() + 1);
+
 
 function addNewTask() {
     let title = document.getElementById("titleInput");
@@ -105,31 +109,40 @@ function updateTimerDisplay(timeDifference, timerDisplay) {
     // Update the timer display
     timerDisplay.innerHTML = minutes+ ":"+ seconds;
 }
-
+let actionExecuted = false;
+targetDateTime.setMinutes(targetDateTime.getMinutes() + initialTime);
 function countdownTime(){
-    let countdownTime;
-    let currentTime = new Date();
+   
+    currentTime = new Date();
+   
+    workTag = document.getElementById("workTag");
+    timeDifference = targetDateTime - currentTime;
     
-    if (restBoolean){
-        targetDateTime.setMinutes(restTime);
-        countdownTime = document.getElementById("restTimer");
-    } else{
-        countdownTime = document.getElementById("workTimer");
-    }
-    let timeDifference = targetDateTime - currentTime;
+    
 
     // Check if the target date and time have passed
+   
+   
+   
     if (timeDifference <= 0) {
-        clearInterval(intervalCountdown);
-        // Perform any action when the target date and time are reached
-      
-        restBoolean = true;
-        startButton.innerHTML = "Start"
+      if (!restBoolean){
+        targetDateTime = restTime;
+        rest();
+      } else {
+        targetDateTime = initialTime;
+      }
+        
+       
     } else {
-        updateTimerDisplay(timeDifference, countdownTime);
+        updateTimerDisplay(timeDifference, countdownTimer);
     }
 }
-
+function rest(){
+    currentTime = new Date();
+    timeDifference = targetDateTime - currentTime;
+    updateTimerDisplay(timeDifference, countdownTimer);
+    restBoolean = true;
+}
 function executeTimerFunction(){
 
     startButton = document.getElementById("startStopButton");
